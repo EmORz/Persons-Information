@@ -1,0 +1,11 @@
+C:\Users\User\source\repos\InfoForPersons\DateDiff\bin\Debug\netcoreapp2.1\DateDiff.deps.json
+C:\Users\User\source\repos\InfoForPersons\DateDiff\bin\Debug\netcoreapp2.1\DateDiff.runtimeconfig.json
+C:\Users\User\source\repos\InfoForPersons\DateDiff\bin\Debug\netcoreapp2.1\DateDiff.runtimeconfig.dev.json
+C:\Users\User\source\repos\InfoForPersons\DateDiff\bin\Debug\netcoreapp2.1\DateDiff.dll
+C:\Users\User\source\repos\InfoForPersons\DateDiff\bin\Debug\netcoreapp2.1\DateDiff.pdb
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.csprojAssemblyReference.cache
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.AssemblyInfo.cs
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.dll
+C:\Users\User\source\repos\InfoForPersons\DateDiff\obj\Debug\netcoreapp2.1\DateDiff.pdb
