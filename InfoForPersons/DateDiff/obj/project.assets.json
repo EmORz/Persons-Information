@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\InfoForPersons\\DateDiff\\DateDiff.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\Persons-Information\\InfoForPersons\\DateDiff\\DateDiff.csproj",
       "projectName": "DateDiff",
-      "projectPath": "C:\\Users\\User\\source\\repos\\InfoForPersons\\DateDiff\\DateDiff.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\Persons-Information\\InfoForPersons\\DateDiff\\DateDiff.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\InfoForPersons\\DateDiff\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\Persons-Information\\InfoForPersons\\DateDiff\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

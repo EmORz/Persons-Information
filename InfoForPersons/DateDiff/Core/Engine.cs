@@ -1,41 +1,48 @@
-﻿using DateDiff.Models;
+﻿using DateDiff.Core.IO;
+using DateDiff.Models;
 using DateDiff.StaticMessages;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DateDiff.Core
 {
     public class Engine : IEngine
     {
+        public IReader reader;
+        public IWriter writer;
         public IPerson Person;
         public List<IPerson> InfoListAcept;
         public List<IPerson> InfoListEject;
 
         public Engine()
         {
+            reader = new ConsoleReader();
+            writer = new ConsoleWriter();
             Person = new Person();
             InfoListAcept = new List<IPerson>();
             InfoListEject = new List<IPerson>();
         }
         public void Run()
         {
+            StringBuilder sb = new StringBuilder();
             while (true)
             {
-                var enterInSystem = Console.ReadLine();
-                if (enterInSystem == "y")
+                var enterInSystem = reader.Reader() ;
+                if (enterInSystem.Equals("y"))
                 {
-                    enterInSystem = Console.ReadLine();
-                    Console.WriteLine(Messages.EnterName);
-                    var name = Console.ReadLine();
+                    enterInSystem = reader.Reader();
+                    writer.WriteLine(Messages.EnterName);
+                    var name = reader.Reader();
 
-                    Console.WriteLine(Messages.EnterYear);
-                    var year = int.Parse(Console.ReadLine());
+                    writer.WriteLine(Messages.EnterYear);
+                    var year = int.Parse(reader.Reader());
 
-                    Console.WriteLine(Messages.EnterMonth);
-                    var month = byte.Parse(Console.ReadLine());
+                    writer.WriteLine(Messages.EnterMonth);
+                    var month = byte.Parse(reader.Reader());
 
-                    Console.WriteLine(Messages.EnterDay);
-                    var days = byte.Parse(Console.ReadLine());
+                    writer.WriteLine(Messages.EnterDay);
+                    var days = byte.Parse(reader.Reader());
 
 
                     DateTime temp = new DateTime(year, month, days);
@@ -44,15 +51,16 @@ namespace DateDiff.Core
 
                     if (testIsCanGiveBlood)
                     {
-                        Console.WriteLine(Messages.ClientCanGiveBlood);
+                        sb.AppendLine(Person.Name+"+");
+                        writer.WriteLine(Messages.ClientCanGiveBlood);
                         InfoListAcept.Add(Person);
                     }
                     else
                     {
-                        Console.WriteLine(Messages.ClientCantGiveBlood);
+                        sb.AppendLine(Person.Name + "-");
+                        writer.WriteLine(Messages.ClientCantGiveBlood);
                         Person.Diff();
                         InfoListEject.Add(Person);
-
                     }
                 }
                 else
@@ -60,17 +68,17 @@ namespace DateDiff.Core
                     break;
                 }
             }
-            Console.WriteLine("Acept");
-            Console.WriteLine("Total: "+InfoListAcept.Count);
+            writer.WriteLine("Acept");
+            writer.WriteLine("Total: "+InfoListAcept.Count);
             foreach (var person in InfoListAcept)
             {
-                Console.WriteLine(person.Name);
+                writer.WriteLine(person.Name);
             }
-            Console.WriteLine("Decline");
-            Console.WriteLine("Total: "+InfoListEject.Count);
+            writer.WriteLine("Decline");
+            writer.WriteLine("Total: "+InfoListEject.Count);
             foreach (var person in InfoListEject)
             {
-                Console.WriteLine(person.Name);
+                writer.WriteLine(person.Name);
             }
 
         }
