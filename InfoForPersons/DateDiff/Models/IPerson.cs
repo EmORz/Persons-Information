@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DateDiff.Models
+﻿namespace DateDiff.Models
 {
+    using System;
+
     /// <summary>
     /// base class for Person with Interface IPerson
     /// </summary>
@@ -30,6 +30,6 @@ namespace DateDiff.Models
         /// <summary>
         /// void method for calculation, when patient will be in condition to give blood
         /// </summary>
-        void Diff();
+        void Diff(DateTime temporal);
     }
 }

@@ -1,7 +1,7 @@
-﻿using DateDiff.Core;
-
-namespace DateDiff
+﻿namespace DateDiff
 {
+    using Core;
+
     public class StartUp
     {
         public static void Main(string[] args)

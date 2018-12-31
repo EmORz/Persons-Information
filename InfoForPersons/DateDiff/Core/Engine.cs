@@ -1,14 +1,16 @@
-﻿using DateDiff.Core.IO;
-using DateDiff.Models;
-using DateDiff.StaticMessages;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DateDiff.Core
+﻿namespace DateDiff.Core
 {
+    using Factory;
+    using Factory.Contract;
+    using IO;
+    using Models;
+    using StaticMessages;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Engine : IEngine
     {
+        public IPeopleFactory peopleFactory;
         public IReader reader;
         public IWriter writer;
         public IPerson Person;
@@ -20,6 +22,7 @@ namespace DateDiff.Core
             reader = new ConsoleReader();
             writer = new ConsoleWriter();
             Person = new Person();
+            peopleFactory = new PeopleFactory();
             InfoListAcept = new List<IPerson>();
             InfoListEject = new List<IPerson>();
         }
@@ -32,35 +35,22 @@ namespace DateDiff.Core
                 if (enterInSystem.Equals("y"))
                 {
                     enterInSystem = reader.Reader();
-                    writer.WriteLine(Messages.EnterName);
-                    var name = reader.Reader();
-
-                    writer.WriteLine(Messages.EnterYear);
-                    var year = int.Parse(reader.Reader());
-
-                    writer.WriteLine(Messages.EnterMonth);
-                    var month = byte.Parse(reader.Reader());
-
-                    writer.WriteLine(Messages.EnterDay);
-                    var days = byte.Parse(reader.Reader());
-
-
-                    DateTime temp = new DateTime(year, month, days);
-                    Person = new Person(name, temp);
-                    var testIsCanGiveBlood = Person.IsValid(Person.CurrentDay);
+                    var instance = peopleFactory.CreatePerson();
+                    var temporalDate = instance.CurrentDay;
+                    var testIsCanGiveBlood = instance.IsValid(instance.CurrentDay);
 
                     if (testIsCanGiveBlood)
                     {
-                        sb.AppendLine(Person.Name+"+");
+                        sb.AppendLine(instance.Name+"+");
                         writer.WriteLine(Messages.ClientCanGiveBlood);
-                        InfoListAcept.Add(Person);
+                        InfoListAcept.Add(instance);
                     }
                     else
                     {
-                        sb.AppendLine(Person.Name + "-");
+                        sb.AppendLine(instance.Name + "-");
                         writer.WriteLine(Messages.ClientCantGiveBlood);
-                        Person.Diff();
-                        InfoListEject.Add(Person);
+                        Person.Diff(temporalDate);
+                        InfoListEject.Add(instance);
                     }
                 }
                 else
@@ -80,7 +70,6 @@ namespace DateDiff.Core
             {
                 writer.WriteLine(person.Name);
             }
-
         }
     }
 }

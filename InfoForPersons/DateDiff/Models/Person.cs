@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-
-namespace DateDiff.Models
+﻿namespace DateDiff.Models
 {
+    using System;
+    using System.Text;
+
     /// <summary>
     /// Base class for patient
     /// </summary>
@@ -40,10 +40,10 @@ namespace DateDiff.Models
             }
             return false;
         }
-        public void Diff()
+        public void Diff(DateTime temporal)
         {
             StringBuilder sb = new StringBuilder();
-            var current = this.CurrentDay;
+            var current = temporal;
             var now = DateTime.Now;
             var temp = (current - now);
             var days = temp.Days;

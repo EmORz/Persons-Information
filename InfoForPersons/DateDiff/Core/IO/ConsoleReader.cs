@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace DateDiff.Core.IO
+﻿namespace DateDiff.Core.IO
 {
+    using System;
+
     public class ConsoleReader : IReader
     {
         public string Reader()
