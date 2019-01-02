@@ -14,6 +14,8 @@
         private const int AditionalDays = 60;
         
         public string Name { get; set; }
+
+        public int Days { get; set; }
       
         public DateTime CurrentDay { get; set; }
         /// <summary>
@@ -52,6 +54,15 @@
             sb.AppendLine($"After {date} wellcome in our blood bank center!");
 
             Console.WriteLine(sb.ToString().Trim());
+        }
+
+        public int NeededDays(DateTime temporal)
+        {
+            var current = temporal;
+            var now = DateTime.Now;
+            var temp = (current - now);
+            var days = temp.Days;
+            return days;
         }
     }
 }

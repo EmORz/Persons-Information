@@ -16,6 +16,7 @@
         public IPerson Person;
         public List<IPerson> InfoListAcept;
         public List<IPerson> InfoListEject;
+        public List<int> Count = new List<int>();
 
         public Engine()
         {
@@ -29,46 +30,56 @@
         public void Run()
         {
             StringBuilder sb = new StringBuilder();
+
             while (true)
             {
-                var enterInSystem = reader.Reader() ;
-                if (enterInSystem.Equals("y"))
-                {
-                    enterInSystem = reader.Reader();
-                    var instance = peopleFactory.CreatePerson();
-                    var temporalDate = instance.CurrentDay;
-                    var testIsCanGiveBlood = instance.IsValid(instance.CurrentDay);
-
-                    if (testIsCanGiveBlood)
-                    {
-                        sb.AppendLine(instance.Name+"+");
-                        writer.WriteLine(Messages.ClientCanGiveBlood);
-                        InfoListAcept.Add(instance);
-                    }
-                    else
-                    {
-                        sb.AppendLine(instance.Name + "-");
-                        writer.WriteLine(Messages.ClientCantGiveBlood);
-                        Person.Diff(temporalDate);
-                        InfoListEject.Add(instance);
-                    }
-                }
-                else
+                writer.WriteLine(Messages.EnterName);
+                var name = reader.Reader();
+                if (name == "y")
                 {
                     break;
                 }
+                var instance = peopleFactory.CreatePerson(name);
+                var temporalDate = instance.CurrentDay;
+                var testIsCanGiveBlood = instance.IsValid(instance.CurrentDay);
+
+                if (testIsCanGiveBlood)
+                {
+                    writer.WriteLine(Messages.ClientCanGiveBlood);
+                    InfoListAcept.Add(instance);
+                }
+                else
+                {
+                    writer.WriteLine(Messages.ClientCantGiveBlood);
+                    Person.Diff(temporalDate);
+                    Count.Add(Person.NeededDays(temporalDate));
+                    InfoListEject.Add(instance);
+                }
             }
+            //Total Result
             writer.WriteLine("Acept");
-            writer.WriteLine("Total: "+InfoListAcept.Count);
-            foreach (var person in InfoListAcept)
+            writer.WriteLine("Total: " + InfoListAcept.Count);
+            Printing(InfoListAcept);
+
+            writer.WriteLine("Decline");
+            writer.WriteLine("Total: " + InfoListEject.Count);
+            PrintPeople(InfoListEject);
+        }
+
+        private void Printing(List<IPerson> infoListAcept)
+        {
+            foreach (var person in infoListAcept)
             {
                 writer.WriteLine(person.Name);
             }
-            writer.WriteLine("Decline");
-            writer.WriteLine("Total: "+InfoListEject.Count);
-            foreach (var person in InfoListEject)
+        }
+
+        private void PrintPeople(List<IPerson> temp)
+        {
+            for (int i = 0; i < temp.Count; i++)
             {
-                writer.WriteLine(person.Name);
+                var person = (temp[i].Name);
+                writer.WriteLine("After "+Count[i]+$" days {person} will can give blood");
             }
         }
     }

@@ -4,6 +4,6 @@
 
     public interface IPeopleFactory
     {
-        IPerson CreatePerson();
+        IPerson CreatePerson(string name);
     }
 }
