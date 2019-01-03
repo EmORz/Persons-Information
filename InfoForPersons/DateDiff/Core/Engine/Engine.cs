@@ -1,5 +1,4 @@
-﻿using DateDiff.Models.BloodBank;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 
@@ -15,13 +14,6 @@ namespace DateDiff.Core
 
     public class Engine : IEngine
     {
-        public int Const = 1000;
-        public int a = 0;
-        public int b = 0;
-        public int ab = 0;
-        public int zero = 0;
-
-
         public IPeopleFactory peopleFactory;
         public IReader reader;
         public IWriter writer;
