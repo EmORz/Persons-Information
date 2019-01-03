@@ -1,4 +1,9 @@
-﻿namespace DateDiff.Core
+﻿using DateDiff.Models.BloodBank;
+using System;
+using System.Linq;
+using System.Reflection;
+
+namespace DateDiff.Core
 {
     using Factory;
     using Factory.Contract;
@@ -10,6 +15,13 @@
 
     public class Engine : IEngine
     {
+        public int Const = 1000;
+        public int a = 0;
+        public int b = 0;
+        public int ab = 0;
+        public int zero = 0;
+
+
         public IPeopleFactory peopleFactory;
         public IReader reader;
         public IWriter writer;
@@ -35,6 +47,8 @@
             {
                 writer.WriteLine(Messages.EnterName);
                 var name = reader.Reader();
+                var bloodGroup = reader.Reader().ToLower();
+
                 if (name == "y")
                 {
                     break;
@@ -46,6 +60,14 @@
                 if (testIsCanGiveBlood)
                 {
                     writer.WriteLine(Messages.ClientCanGiveBlood);
+                    Type type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(x => x.Name == bloodGroup.ToUpper());
+                    var instanceBlood = type.GetMethod("Model", BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
+                    var isFull = (bool)type.GetField("test").GetValue(type);
+
+                    if (isFull)
+                    {
+                        continue;
+                    }
                     InfoListAcept.Add(instance);
                 }
                 else
@@ -79,7 +101,7 @@
             for (int i = 0; i < temp.Count; i++)
             {
                 var person = (temp[i].Name);
-                writer.WriteLine("After "+Count[i]+$" days {person} will can give blood");
+                writer.WriteLine("After " + Count[i] + $" days {person} will can give blood");
             }
         }
     }
